@@ -24,7 +24,8 @@ public class TaskController {
 				"TODO"
 		);
 		var taskList = List.of(task1, task2);
-		model.addAttribute("taskList", taskList);
+		// "taskList"の値がth:each="task: ${taskList}"に入る
+		model.addAttribute("taskList", taskList); 
 		return "tasks/list";
 	}
 }
