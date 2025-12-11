@@ -8,7 +8,13 @@ import com.example.todo.service.task.TaskService;
 
 @Controller
 public class TaskController {
-	private final TaskService taskService = new TaskService();
+	private final TaskService taskService;
+	//private final TaskService taskService = new TaskService();
+	// 依存性注入（DI: Dependency Injection）とは、
+	//“必要なオブジェクトは 自分で new せず、外部から与えてもらう” という仕組み・考え方
+	public TaskController(TaskService taskService) {
+		this.taskService = taskService;
+	}
 	
 	@GetMapping("/tasks")
 	public String list(Model model) {
