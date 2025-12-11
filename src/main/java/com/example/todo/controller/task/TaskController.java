@@ -3,6 +3,7 @@ package com.example.todo.controller.task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.todo.service.task.TaskService;
 
@@ -30,8 +31,9 @@ public class TaskController {
 	 * @return
 	 */
 	
-	@GetMapping("tasks/detail")
-	public String showDetaul() {
+	@GetMapping("tasks/{id}")
+	public String showDetaul(@PathVariable("id") long taskId, Model model) {
+		model.addAttribute("taskId", taskId);
 		return "tasks/detail";
 	}
 }
