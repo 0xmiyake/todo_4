@@ -24,4 +24,14 @@ public class TaskController {
 		
 		return "tasks/list";
 	}
+	
+	/**
+	 * 詳細画面
+	 * @return
+	 */
+	
+	@GetMapping("tasks/detail")
+	public String showDetaul() {
+		return "tasks/detail";
+	}
 }
