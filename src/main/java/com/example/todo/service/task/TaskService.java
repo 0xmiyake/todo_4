@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service // ここでBean登録をする
 public class TaskService {
 	
 	public List<TaskEntity> find(){
