@@ -27,13 +27,22 @@ public class TaskController {
 	}
 	
 	/**
-	 * 詳細画面
-	 * @return
+	 * タスク詳細画面
+	 * 指定された ID のタスク情報を取得して画面へ渡す
 	 */
-	
 	@GetMapping("tasks/{id}")
 	public String showDetaul(@PathVariable("id") long taskId, Model model) {
-		model.addAttribute("taskId", taskId);
-		return "tasks/detail";
+
+	    // 指定 ID の TaskEntity を Service から取得
+	    // 見つからない場合は IllegalArgumentException をスロー（404 の代わり）
+	    var taskEntity = taskService.findById(taskId)
+	            .orElseThrow(() -> new IllegalArgumentException("Task not found: id = " + taskId));
+
+	    // 画面で利用するため taskId を Model に追加
+	    // TaskEntity は record なので id() でアクセスできる
+	    model.addAttribute("taskId", taskEntity.id());
+
+	    // resources/templates/tasks/detail.html をレンダリング
+	    return "tasks/detail";
 	}
 }

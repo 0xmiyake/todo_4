@@ -1,6 +1,7 @@
 package com.example.todo.service.task;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,10 @@ public class TaskService {
 	
 	public List<TaskEntity> find(){
 		return taskRepository.select();
+	}
+
+	public Optional<TaskEntity> findById(long taskId) {
+		return taskRepository.selectById(taskId);
+		
 	}
 }
