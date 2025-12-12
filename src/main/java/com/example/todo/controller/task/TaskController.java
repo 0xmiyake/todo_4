@@ -40,7 +40,7 @@ public class TaskController {
 
 	    // 画面で利用するため taskId を Model に追加
 	    // TaskEntity は record なので id() でアクセスできる
-	    model.addAttribute("taskId", taskEntity.id());
+	    model.addAttribute("task", TaskDTO.toDTO(taskEntity));
 
 	    // resources/templates/tasks/detail.html をレンダリング
 	    return "tasks/detail";
