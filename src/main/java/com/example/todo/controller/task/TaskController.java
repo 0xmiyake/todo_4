@@ -30,7 +30,7 @@ public class TaskController {
 	 * タスク詳細画面
 	 * 指定された ID のタスク情報を取得して画面へ渡す
 	 */
-	@GetMapping("tasks/{id}")
+	@GetMapping("/tasks/{id}")
 	public String showDetaul(@PathVariable("id") long taskId, Model model) {
 
 	    // 指定 ID の TaskEntity を Service から取得
