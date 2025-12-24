@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.todo.service.task.TaskService;
 
@@ -46,9 +47,25 @@ public class TaskController {
 	    return "tasks/detail";
 	}
 	
-	// Get /tasks/creationForm
+	
+	/**
+	 * 作成画面への遷移
+	 *  Get /tasks/creationForm
+	 * @return
+	 */
 	@GetMapping("/tasks/creationForm")
 	public String showCreationForm() {
 		return "tasks/form";
+	}
+	
+	// POST /tasks
+	/**
+	 * 作成のリクエストを受け取るハンドラーメソッド
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/tasks")
+	public String create(Model model) {
+		return list(model);
 	}
 }
