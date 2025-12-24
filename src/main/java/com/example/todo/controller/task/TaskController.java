@@ -65,7 +65,7 @@ public class TaskController {
 	 * @return
 	 */
 	@PostMapping("/tasks")
-	public String create(Model model) {
+	public String create(TaskFrom form, Model model) {
 		return list(model);
 	}
 }
