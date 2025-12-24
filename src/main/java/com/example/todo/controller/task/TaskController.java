@@ -45,4 +45,10 @@ public class TaskController {
 	    // resources/templates/tasks/detail.html をレンダリング
 	    return "tasks/detail";
 	}
+	
+	// Get /tasks/creationForm
+	@GetMapping("/tasks/creationForm")
+	public String showCreationForm() {
+		return "tasks/form";
+	}
 }
