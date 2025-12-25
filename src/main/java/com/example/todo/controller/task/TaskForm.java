@@ -6,7 +6,7 @@ import com.example.todo.service.task.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 
 
-public record TaskFrom(
+public record TaskForm(
 		@NotBlank //79: バリデーション 必須入力
 		String summary,
 		String description,

@@ -70,7 +70,7 @@ public class TaskController {
 	 * @return
 	 */
 	@PostMapping
-	public String create(@Validated TaskFrom form, BindingResult bindingResult) {  
+	public String create(@Validated TaskForm form, BindingResult bindingResult) {  
 		// 79: 以下、空文字で入力した際、再度フォーム画面に戻る分岐処理
 		if (bindingResult.hasErrors()) { //  79:バリデーションエラーの確認
 			return "tasks/form"; // 79: form.htmlを指している
