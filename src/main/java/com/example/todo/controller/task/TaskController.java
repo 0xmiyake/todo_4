@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.todo.service.task.TaskEntity;
 import com.example.todo.service.task.TaskService;
-import com.example.todo.service.task.TaskStatus;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,8 +66,7 @@ public class TaskController {
 	 */
 	@PostMapping("/tasks")
 	public String create(TaskFrom form) {
-		var newEntity = new TaskEntity(null, form.summary(), form.description(), TaskStatus.valueOf(form.status()));
-		taskService.create(newEntity);
+		taskService.create(form.toEntity());
 		return "redirect:/tasks";  // 二重サブミット対策
 	}
 }
