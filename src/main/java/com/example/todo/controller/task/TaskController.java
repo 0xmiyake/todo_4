@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.todo.service.task.TaskService;
 
@@ -12,11 +13,13 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor // 39: Lombockを使ってボイラープレートコードの削減
+@RequestMapping("/tasks") // 78: パス指定の繰り返しを減らす
+
 public class TaskController {
 	private final TaskService taskService;
 
 	
-	@GetMapping("/tasks")
+	@GetMapping
 	public String list(Model model) {
 		var taskList = taskService.find() // List<TaskEntity>が入っているこれをList<TaskDTO>
 			.stream()
@@ -31,7 +34,7 @@ public class TaskController {
 	 * タスク詳細画面
 	 * 指定された ID のタスク情報を取得して画面へ渡す
 	 */
-	@GetMapping("/tasks/{id}")
+	@GetMapping("/{id}")
 	public String showDetaul(@PathVariable("id") long taskId, Model model) {
 
 	    // 指定 ID の TaskEntity を Service から取得
@@ -53,7 +56,7 @@ public class TaskController {
 	 *  Get /tasks/creationForm
 	 * @return
 	 */
-	@GetMapping("/tasks/creationForm")
+	@GetMapping("/creationForm")
 	public String showCreationForm() {
 		return "tasks/form";
 	}
@@ -64,7 +67,7 @@ public class TaskController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/tasks")
+	@PostMapping
 	public String create(TaskFrom form) {
 		taskService.create(form.toEntity());
 		return "redirect:/tasks";  // 二重サブミット対策
