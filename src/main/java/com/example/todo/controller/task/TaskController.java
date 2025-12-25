@@ -67,9 +67,9 @@ public class TaskController {
 	 * @return
 	 */
 	@PostMapping("/tasks")
-	public String create(TaskFrom form, Model model) {
+	public String create(TaskFrom form) {
 		var newEntity = new TaskEntity(null, form.summary(), form.description(), TaskStatus.valueOf(form.status()));
 		taskService.create(newEntity);
-		return list(model);
+		return "redirect:/tasks";  // 二重サブミット対策
 	}
 }
