@@ -13,10 +13,13 @@
 			<div>
 				<label for="summaryInput">概要</label>
 				<input type="text" id="summaryInput" th:field="*{summary}">
+				<span th:errors="*{summary}"></span>
 			</div>
 			<div>
 				<label for="descriptionInput">詳細</label>
 				<textarea id="descriptionInput" th:field="*{description}"></textarea>
+				<span th:errors="*{description}"></span>
+
 			</div>
 			<div>
 				<label for="statusInput">ステータス</label>
@@ -25,6 +28,7 @@
 					<option value="DOING">Doing</option>
 					<option value="DONE">Done</option>
 				</select>
+				<span th:errors="*{status}"></span>
 			</div>
 			<div>
 				<button type="submit">作成</button>
