@@ -59,7 +59,11 @@ public class TaskController {
 	 * @return
 	 */
 	@GetMapping("/creationForm")
-	public String showCreationForm() {
+	public String showCreationForm(TaskForm form, Model model) {
+		if(form == null) {
+			form = new TaskForm(null, null, null);
+		}
+		model.addAttribute("taskForm", form);
 		return "tasks/form";
 	}
 	
@@ -70,10 +74,12 @@ public class TaskController {
 	 * @return
 	 */
 	@PostMapping
-	public String create(@Validated TaskForm form, BindingResult bindingResult) {  
+	public String create(@Validated TaskForm form, BindingResult bindingResult, Model model) {  
 		// 79: 以下、空文字で入力した際、再度フォーム画面に戻る分岐処理
 		if (bindingResult.hasErrors()) { //  79:バリデーションエラーの確認
-			return "tasks/form"; // 79: form.htmlを指している
+			return showCreationForm(form, model); 
+			//80:  タスク作成時のPOSTリクエストで受け取ったタスクフォームを
+//			       バリデーションエラー時にクリエーションフォームに渡す
 		}
 		taskService.create(form.toEntity());
 		return "redirect:/tasks";  // 二重サブミット対策
