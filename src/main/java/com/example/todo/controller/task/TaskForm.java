@@ -4,6 +4,7 @@ import com.example.todo.service.task.TaskEntity;
 import com.example.todo.service.task.TaskStatus;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 
@@ -13,6 +14,7 @@ public record TaskForm(
 		String summary,
 		String description,
 		@NotBlank
+		@Pattern(regexp="TODO|DOING|DONE", message="Todo, Doing, Doneのいずれかを選択してください。")// 84: ステータスに入力できる文字の制限		
 		String status
 		) {
 
