@@ -13,12 +13,12 @@
 			<div>
 				<label for="summaryInput">概要</label>
 				<input type="text" id="summaryInput" th:field="*{summary}">
-				<span th:errors="*{summary}"></span>
+				<span th:errors="*{summary}"></span> // 82: バリデーションメッセージの表示
 			</div>
 			<div>
 				<label for="descriptionInput">詳細</label>
 				<textarea id="descriptionInput" th:field="*{description}"></textarea>
-				<span th:errors="*{description}"></span>
+				<span th:errors="*{description}"></span>  // 82: バリデーションメッセージの表示
 
 			</div>
 			<div>
@@ -28,7 +28,7 @@
 					<option value="DOING">Doing</option>
 					<option value="DONE">Done</option>
 				</select>
-				<span th:errors="*{status}"></span>
+				<span th:errors="*{status}"></span>  // 82: バリデーションメッセージの表示
 			</div>
 			<div>
 				<button type="submit">作成</button>
