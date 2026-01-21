@@ -38,12 +38,12 @@ public class TaskController {
 	 * 指定された ID のタスク情報を取得して画面へ渡す
 	 */
 	@GetMapping("/{id}")
-	public String showDetaul(@PathVariable("id") long taskId, Model model) {
+	public String showDetail(@PathVariable("id") long taskId, Model model) {
 
 	    // 指定 ID の TaskEntity を Service から取得
 	    // 見つからない場合は IllegalArgumentException をスロー（404 の代わり）
 	    var taskEntity = taskService.findById(taskId)
-	            .orElseThrow(() -> new IllegalArgumentException("Task not found: id = " + taskId));
+	            .orElseThrow(TaskNotFoundException::new);
 
 	    // 画面で利用するため taskId を Model に追加
 	    // TaskEntity は record なので id() でアクセスできる
