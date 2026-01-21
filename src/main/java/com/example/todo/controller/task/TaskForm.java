@@ -18,6 +18,15 @@ public record TaskForm(
 		String status
 		) {
 
+	// 92: タスクフォームが存在していない時にタスクフォームを生成するメソッド
+	public static TaskForm formEntity(TaskEntity taskEntity) {
+		return new TaskForm(
+				taskEntity.summary(),
+				taskEntity.description(),
+				taskEntity.status().name()
+		);
+	}
+
 	public TaskEntity toEntity() {
 		// TODO 自動生成されたメソッド・スタブ
 		return new TaskEntity(null, summary(), description(), TaskStatus.valueOf(status()));

@@ -89,7 +89,7 @@ public class TaskController {
 		// 90: タスク編集画面にフォームに入力した値を取得する
 		var taskEntity = taskService.findById(id)
 						.orElseThrow(TaskNotFoundException::new); // 91: 404エラー：引数のないメソッドの呼び出し時の書き方(メソッド参照)
-		var form = new TaskForm(taskEntity.summary(), taskEntity.description(), taskEntity.status().name());
+		var form = TaskForm.formEntity(taskEntity); // 92: リファクタリング entityをformに変換
 		model.addAttribute("taskForm", form);
 		return "tasks/form";
 	}
