@@ -42,12 +42,13 @@ public class TaskController {
 
 	    // 指定 ID の TaskEntity を Service から取得
 	    // 見つからない場合は IllegalArgumentException をスロー（404 の代わり）
-	    var taskEntity = taskService.findById(taskId)
+	    var taskDTO = taskService.findById(taskId)
+				.map(TaskDTO::toDTO)
 	            .orElseThrow(TaskNotFoundException::new);
 
 	    // 画面で利用するため taskId を Model に追加
 	    // TaskEntity は record なので id() でアクセスできる
-	    model.addAttribute("task", TaskDTO.toDTO(taskEntity));
+	    model.addAttribute("task", taskDTO);
 
 	    // resources/templates/tasks/detail.html をレンダリング
 	    return "tasks/detail";
@@ -87,9 +88,9 @@ public class TaskController {
 	@GetMapping("/{id}/editForm")
 	public String showEditForm(@PathVariable("id") long id, Model model){
 		// 90: タスク編集画面にフォームに入力した値を取得する
-		var taskEntity = taskService.findById(id)
-						.orElseThrow(TaskNotFoundException::new); // 91: 404エラー：引数のないメソッドの呼び出し時の書き方(メソッド参照)
-		var form = TaskForm.formEntity(taskEntity); // 92: リファクタリング entityをformに変換
+		var form = taskService.findById(id)
+				.map(TaskForm::formEntity) // 92: リファクタリング entityをformに変換)
+				.orElseThrow(TaskNotFoundException::new); // 91: 404エラー：引数のないメソッドの呼び出し時の書き方(メソッド参照)
 		model.addAttribute("taskForm", form);
 		return "tasks/form";
 	}
