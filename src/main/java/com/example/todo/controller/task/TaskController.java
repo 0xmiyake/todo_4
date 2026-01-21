@@ -67,7 +67,7 @@ public class TaskController {
 	// POST /tasks
 	/**
 	 * 作成のリクエストを受け取るハンドラーメソッド
-	 * @param model
+	 * @param
 	 * @return
 	 */
 	@PostMapping
@@ -80,5 +80,14 @@ public class TaskController {
 		}
 		taskService.create(form.toEntity());
 		return "redirect:/tasks";  // 二重サブミット対策
+	}
+
+	// 88: タスク編集ページ
+	// GET/ tasks/{taskId}/editForm
+	@GetMapping("/{id}/editForm")
+	public String showEditForm(@PathVariable("id") long id, Model model){
+		var form = new TaskForm("hoge", "hogehoge", "TODO");
+		model.addAttribute("taskForm", form);
+		return "tasks/form";
 	}
 }
