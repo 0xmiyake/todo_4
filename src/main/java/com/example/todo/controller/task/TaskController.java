@@ -88,7 +88,7 @@ public class TaskController {
 	public String showEditForm(@PathVariable("id") long id, Model model){
 		// 90: タスク編集画面にフォームに入力した値を取得する
 		var taskEntity = taskService.findById(id)
-						.orElseThrow(() -> new IllegalArgumentException(("Task not found")));
+						.orElseThrow(TaskNotFoundException::new); // 91: 404エラー：引数のないメソッドの呼び出し時の書き方(メソッド参照)
 		var form = new TaskForm(taskEntity.summary(), taskEntity.description(), taskEntity.status().name());
 		model.addAttribute("taskForm", form);
 		return "tasks/form";
